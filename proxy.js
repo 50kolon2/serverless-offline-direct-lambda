@@ -14,7 +14,9 @@ function handler(event, context, callback) {
       // Return Serverless error to AWS sdk
       callback(null, {
         FunctionError: 'Unhandled',
-        ...serializeError(err)
+        errorType: err.name,
+        errorMessage: err.message,
+        trace: serializeError(err).stack
       })
     })
 }
